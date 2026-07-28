@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <!--
+    Favicon: a régua de tolerância reduzida ao essencial.
+
+    Uma barra que atravessa a linha do limite — verde no trecho tolerado,
+    vermelho no excedente. É o elemento assinatura do produto em duas formas, que
+    é o máximo que sobrevive a 16 pixels. Ticks de régua e ponteiro somem nesse
+    tamanho e só produziriam sujeira.
+
+    Fundo escuro para o ícone sobreviver tanto à aba clara quanto à escura; os
+    tons são clareados em relação à paleta do site, que foi calibrada para
+    contraste sobre papel, não sobre carbono.
+  -->
+  <rect width="32" height="32" rx="7" fill="#14181A"/>
+
+  <!-- Faixa tolerada: da origem até o limite -->
+  <rect x="3.5" y="10" width="13" height="12" rx="1.5" fill="#5EAE85"/>
+
+  <!-- Excedente: além do limite -->
+  <rect x="19" y="10" width="9.5" height="12" rx="1.5" fill="#D9614F"/>
+
+  <!-- O limite: a linha que não pode ser cruzada -->
+  <rect x="16.4" y="4.5" width="3.2" height="23" rx="1.4" fill="#F1F3EE"/>
+</svg>

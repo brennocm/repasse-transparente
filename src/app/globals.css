@@ -1,0 +1,205 @@
+@import 'tailwindcss';
+
+/* ==========================================================================
+   Sistema de design — RepasseTransparente
+   Deriva de specs/001-repasse-transparente/design-direction.md
+   Contrastes medidos, não estimados. Ver a tabela do documento.
+   ========================================================================== */
+
+@theme {
+  /* --- Superfícies -------------------------------------------------------
+     Papel com viés verde-frio. Deliberadamente NÃO é o creme quente #F4F1EA. */
+  --color-papel: #f1f3ee;
+  --color-placa: #e4e8df;
+
+  /* --- Tinta ------------------------------------------------------------- */
+  --color-tinta: #14181a; /* 15,99:1 sobre papel */
+  --color-grafite: #5a625e; /*  5,62:1 */
+  --color-indice: #1b3a57; /* 10,50:1 — estrutura, links */
+  --color-indice-vivo: #27547f; /* estado hover de indice */
+
+  /* --- Carimbos de situação ---------------------------------------------
+     Cores de carimbo, não de alerta de software. Nunca transmitem
+     informação sozinhas: sempre com ícone e rótulo (FR-029). */
+  --color-bloqueio: #a03328; /*  6,27:1 — rejeitado */
+  --color-bloqueio-tenue: #f6e6e3;
+  --color-liberado: #2e6a4f; /*  5,71:1 — pago */
+  --color-liberado-tenue: #e0ece5;
+  --color-retido: #8a5f14; /*  5,04:1 — dinheiro parado */
+  --color-retido-tenue: #f4ead6;
+
+  /* --- Régua -------------------------------------------------------------
+     `forte` para borda funcional (WCAG 1.4.11 exige 3:1). 3,70:1.
+     `regua` é decorativa: fio e marca de escala, jamais texto. */
+  --color-regua-forte: #748073;
+  --color-regua: #cbd2c7;
+
+  /* --- Tipografia --------------------------------------------------------
+     Duas vozes, ambas do sistema. Custo zero de carregamento (Princípio III).
+     Regra literal: número que alguém poderia conferir vai em mono. */
+  --font-texto: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif;
+  --font-dado: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas,
+    'Liberation Mono', monospace;
+
+  /* Tamanhos de leitura: fixos. */
+  --text-2xs: 0.75rem;
+  --text-xs: 0.875rem;
+  --text-sm: 1rem;
+  --text-base: 1.125rem;
+  --text-md: 1.375rem;
+
+  /* Tamanhos de exibição: fluidos.
+     Sem isso, uma palavra longa e indivisível — "RepasseTransparente" —
+     força a largura mínima do bloco acima da viewport em 360px e estoura o
+     layout (NFR-002). Fluidez é correção estrutural, não refinamento. */
+  --text-lg: clamp(1.375rem, 4.5vw, 1.75rem);
+  --text-xl: clamp(1.75rem, 6.5vw, 2.25rem);
+  --text-2xl: clamp(2rem, 8vw, 3rem);
+  --text-3xl: clamp(2.25rem, 10vw, 4rem);
+
+  /* --- Forma -------------------------------------------------------------
+     2px: papel não tem canto arredondado, mas raio zero somado a fios finos
+     cairia no visual de jornal — outro padrão de IA a evitar. */
+  --radius-ficha: 2px;
+  --radius-selo: 2px;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-papel);
+    color: var(--color-tinta);
+    font-family: var(--font-texto);
+    font-size: var(--text-sm);
+    line-height: 1.55;
+    /* Sem `overflow-x: hidden` aqui, deliberadamente.
+       Esconder o estouro satisfaz a NFR-002 na letra e mascara o defeito:
+       o conteúdo continua mais largo que a viewport, só que cortado e
+       ilegível. O layout tem de caber de verdade. Conteúdo largo — tabela,
+       gráfico, código — rola dentro do próprio contêiner.
+       Verificação: `documentElement.scrollWidth <= innerWidth` a 360px. */
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+    /* Nome de produto e identificador longo não têm ponto de quebra natural. */
+    overflow-wrap: break-word;
+  }
+
+  h1 {
+    font-size: var(--text-xl);
+    letter-spacing: -0.03em;
+  }
+  h2 {
+    font-size: var(--text-md);
+  }
+  h3 {
+    font-size: var(--text-base);
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Foco sempre visível, em qualquer elemento interativo (NFR-004). */
+  :focus-visible {
+    outline: 2px solid var(--color-indice);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background-color: var(--color-indice);
+    color: var(--color-papel);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  /* --- Voz do dado -------------------------------------------------------
+     Todo número conferível. Tabular para que as colunas alinhem na vertical,
+     como numa ficha de conferência. */
+  .dado {
+    font-family: var(--font-dado);
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum' 1;
+  }
+
+  /* Sobrescrito: mono, caixa alta, entreletrado. */
+  .sobrescrito {
+    font-family: var(--font-dado);
+    font-size: var(--text-2xs);
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-grafite);
+  }
+
+  /* --- Ficha -------------------------------------------------------------
+     Bloco com trilho de estado na borda esquerda, como a aba colorida de uma
+     pasta de processo. A cor do trilho vem de --trilho, definida por variante. */
+  .ficha {
+    position: relative;
+    border: 1px solid var(--color-regua);
+    border-left: 3px solid var(--trilho, var(--color-regua-forte));
+    border-radius: var(--radius-ficha);
+    background-color: var(--color-papel);
+  }
+
+  .ficha-bloqueio {
+    --trilho: var(--color-bloqueio);
+  }
+  .ficha-liberado {
+    --trilho: var(--color-liberado);
+  }
+  .ficha-retido {
+    --trilho: var(--color-retido);
+  }
+  .ficha-indice {
+    --trilho: var(--color-indice);
+  }
+
+  /* --- Fio de régua ------------------------------------------------------
+     Separador entre linhas de dado. Não usar em área de prosa. */
+  .fio {
+    border-bottom: 1px solid var(--color-regua);
+  }
+}
+
+@layer components {
+  /* --- Ponteiro da régua de tolerância -----------------------------------
+     O único movimento do produto, junto com a barra de custódia. Carrega
+     significado — é o preço encontrando seu lugar na escala — e por isso
+     acontece uma vez só. `prefers-reduced-motion` já é respeitado na camada
+     base, que anula toda animação. */
+  @keyframes deslizar-ponteiro {
+    from {
+      opacity: 0;
+      transform: translateX(0);
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .ponteiro-regua {
+    animation: deslizar-ponteiro 600ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+}

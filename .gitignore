@@ -1,0 +1,85 @@
+# ---------------------------------------------------------------------------
+# Dependências
+# ---------------------------------------------------------------------------
+node_modules/
+.pnp
+.pnp.*
+
+# Este projeto usa npm. Um segundo lockfile no repositório causa instalações
+# divergentes entre máquinas — `package-lock.json` fica versionado, os demais não.
+yarn.lock
+pnpm-lock.yaml
+bun.lockb
+
+# ---------------------------------------------------------------------------
+# Saída de build — tudo regenerável por `npm run build`
+# ---------------------------------------------------------------------------
+.next/
+out/
+build/
+dist/
+.turbo/
+*.tsbuildinfo
+
+# Gerado pelo Next a cada build; versioná-lo só produz conflito.
+next-env.d.ts
+
+# ---------------------------------------------------------------------------
+# Testes
+# ---------------------------------------------------------------------------
+coverage/
+.vitest/
+.nyc_output/
+
+# ---------------------------------------------------------------------------
+# Ambiente e implantação
+# ---------------------------------------------------------------------------
+# O projeto não usa variável de ambiente alguma (Princípio III da Constituição).
+# A regra existe para impedir que um segredo entre por acidente num repositório
+# que é público por desenho.
+.env
+.env.*
+!.env.example
+
+.vercel/
+.netlify/
+
+# ---------------------------------------------------------------------------
+# Ferramentas locais
+# ---------------------------------------------------------------------------
+# Permissões e preferências locais do Claude Code — específicas da máquina.
+.claude/settings.local.json
+
+# Skill genérica de design, não específica deste projeto, e sem o LICENSE.txt
+# que a sua própria frontmatter referencia. Remova esta linha se quiser
+# versioná-la junto com os comandos do Spec Kit, que ficam rastreados.
+.claude/skills/
+
+# ---------------------------------------------------------------------------
+# Editores
+# ---------------------------------------------------------------------------
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ---------------------------------------------------------------------------
+# Registros e temporários
+# ---------------------------------------------------------------------------
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.cache/
+tmp/
+*.tmp
+
+# ---------------------------------------------------------------------------
+# Sistema operacional
+# ---------------------------------------------------------------------------
+.DS_Store
+._*
+Thumbs.db
+desktop.ini
