@@ -1,106 +1,106 @@
 # RepasseTransparente
 
-Auditoria criptográfica, oráculos de preço e rastreabilidade de verbas públicas para a
-primeira infância e educação.
+Cryptographic auditing, price oracles and traceability of public funds for early childhood and education in Brazil.
 
-**Demo:** [repasse-transparente.vercel.app](https://repasse-transparente.vercel.app)
+**Demo:** [repasse-transparente.vercel.app](https://repasse-transparente.vercel.app) (the interface is in Portuguese)
 
-Protótipo desenvolvido para o **UNICEF Youth Challenge Blockchain 2026** — Ideathon UNICEF
-x Superteam Brasil / Blockchain.RIO.
+Prototype built for the **UNICEF Youth Challenge Blockchain 2026**, the UNICEF x Superteam Brasil / Blockchain.RIO Ideathon.
 
-> **Este é um protótipo de demonstração.** Todos os dados são fictícios. Nenhum município,
-> escola, empresa ou pessoa aqui representada existe. A lógica do programa inteligente é
-> **simulada em software** — não há blockchain, carteira ou transação real.
+> **This is a demo prototype.** All data is fictitious. No municipality, school, company or
+> person shown here exists. The smart program logic is **simulated in software**: there is no
+> blockchain, wallet or real transaction.
 
 ---
 
-## O problema
+## The problem
 
-A merenda escolar está entre os alvos mais frequentes de superfaturamento em licitações
-municipais. Quando a auditoria chega, anos depois, o recurso já foi consumido e a criança
-já comeu — ou deixou de comer.
+School meals are among the most frequent targets of overpricing in municipal procurement. By
+the time an audit arrives, years later, the money is already spent and the child has already
+eaten, or gone without.
 
-## A proposta
+## The proposal
 
-Trocar auditoria reativa por **trava preventiva**. Fontes independentes reportam preços de
-mercado; o preço de referência é a **mediana** dessas cotações; qualquer proposta de compra
-acima da mediana mais uma tolerância é **bloqueada antes do desembolso**.
+Replace reactive auditing with a **preventive lock**. Independent sources report market
+prices; the reference price is the **median** of those quotes; any purchase proposal above the
+median plus a tolerance is **blocked before payment**.
 
-A mediana, e não a média, porque uma única fonte comprometida reportando um valor absurdo
-distorce a média inteira — e não move a mediana.
+The median, not the mean, because a single compromised source reporting an absurd value skews
+the whole mean, and does not move the median.
 
-A liquidação acontece em **BRZ**, stablecoin pareada 1:1 ao Real. O lançamento contábil e o
-pagamento passam a ser a mesma operação — não existe a diferença entre os dois onde a
-fraude costuma se alojar.
+Settlement happens in **BRZ**, a stablecoin pegged 1:1 to the Brazilian real. The accounting
+entry and the payment become the same operation, so there is no gap between the two where
+fraud usually hides.
 
-## O que este protótipo demonstra
+## What this prototype shows
 
-- A trava rejeitando uma compra de leite 90% acima do preço de referência, com o valor
-  preservado convertido em refeições escolares
-- A formação da mediana a partir de cinco fontes de categorias distintas, e sua resistência
-  a manipulação
-- Um registro encadeado por hash em que qualquer alteração retroativa é detectável — você
-  pode adulterar um registro e ver a verificação apontá-lo
-- Os quatro atores do ecossistema, cada um com sua visão do sistema
-- Um painel público de transparência acessível sem cadastro
-- A liquidação em BRZ: o valor sai da conta da prefeitura, fica custodiado, e só chega ao
-  fornecedor após duas confirmações de entrega
-- A auditoria do próprio programa Anchor, com as limitações que ele ainda tem — inclusive as
-  duas falhas que o escrow introduziu
+- The lock rejecting a milk purchase 90% above the reference price, with the money saved
+  converted into school meals
+- How the median is formed from five sources of different categories, and how it resists
+  manipulation
+- A hash-chained ledger where any retroactive change is detectable: you can tamper with a
+  record and watch the verification point to it
+- The four actors of the ecosystem, each with its own view of the system
+- A public transparency dashboard, open without sign-up
+- Settlement in BRZ: the money leaves the city's account, is held in custody, and only
+  reaches the supplier after two delivery confirmations
+- The audit of the Anchor program itself, with the limitations it still has, including the
+  two flaws the escrow introduced
 
-## O que ele não é
+## What it is not
 
-Não há blockchain — nenhuma transação toca a Solana, e nenhum BRZ real é movimentado. Não
-há backend, banco de dados ou autenticação real. O login é encenação de produto, sem coleta
-de credencial. Nada aqui está pronto para operar com dinheiro público.
+There is no blockchain: no transaction touches Solana, and no real BRZ moves. There is no
+backend, database or real authentication. The sign-in is a product mock-up and collects no
+credentials. Nothing here is ready to handle public money.
 
 ---
 
-## Metodologia
+## Methodology
 
-O projeto é construído por agentes de IA sob **Spec-Driven Development**, no formato do
-GitHub Spec Kit adaptado ao Claude Code.
+The project is built by AI agents with **spec-driven development**, using the GitHub Spec Kit
+format adapted to Claude Code. The specification documents are in Portuguese.
 
-| Documento | Conteúdo |
+| Document | Contents |
 |---|---|
-| [`.specify/memory/constitution.md`](.specify/memory/constitution.md) | Os sete princípios inegociáveis |
-| [`specs/001-repasse-transparente/spec.md`](specs/001-repasse-transparente/spec.md) | O quê e por quê — 8 histórias, 58 FRs e 8 NFRs |
-| [`specs/001-repasse-transparente/research.md`](specs/001-repasse-transparente/research.md) | Decisões técnicas e a auditoria do programa Anchor |
-| [`specs/001-repasse-transparente/plan.md`](specs/001-repasse-transparente/plan.md) | Como — stack, estrutura, sequenciamento |
-| [`specs/001-repasse-transparente/data-model.md`](specs/001-repasse-transparente/data-model.md) | Entidades, invariantes, máquina de estados |
-| [`specs/001-repasse-transparente/design-direction.md`](specs/001-repasse-transparente/design-direction.md) | Paleta com contrastes medidos, tipografia, layout, assinatura |
-| [`specs/001-repasse-transparente/contracts/`](specs/001-repasse-transparente/contracts/) | Interfaces entre módulos |
-| [`specs/001-repasse-transparente/mock-data.md`](specs/001-repasse-transparente/mock-data.md) | O dataset fictício, com os números conferidos |
-| [`specs/001-repasse-transparente/tasks.md`](specs/001-repasse-transparente/tasks.md) | 85 tarefas, todas concluídas e rastreadas a requisitos |
-| [`specs/001-repasse-transparente/quickstart.md`](specs/001-repasse-transparente/quickstart.md) | Roteiro de verificação manual |
+| [`.specify/memory/constitution.md`](.specify/memory/constitution.md) | The seven non-negotiable principles |
+| [`specs/001-repasse-transparente/spec.md`](specs/001-repasse-transparente/spec.md) | What and why: 8 stories, 58 functional and 8 non-functional requirements |
+| [`specs/001-repasse-transparente/research.md`](specs/001-repasse-transparente/research.md) | Technical decisions and the audit of the Anchor program |
+| [`specs/001-repasse-transparente/plan.md`](specs/001-repasse-transparente/plan.md) | How: stack, structure, sequencing |
+| [`specs/001-repasse-transparente/data-model.md`](specs/001-repasse-transparente/data-model.md) | Entities, invariants, state machine |
+| [`specs/001-repasse-transparente/design-direction.md`](specs/001-repasse-transparente/design-direction.md) | Palette with measured contrast, typography, layout, signature |
+| [`specs/001-repasse-transparente/contracts/`](specs/001-repasse-transparente/contracts/) | Interfaces between modules |
+| [`specs/001-repasse-transparente/mock-data.md`](specs/001-repasse-transparente/mock-data.md) | The fictitious dataset, with the numbers checked |
+| [`specs/001-repasse-transparente/tasks.md`](specs/001-repasse-transparente/tasks.md) | 85 tasks, all done and traced to requirements |
+| [`specs/001-repasse-transparente/quickstart.md`](specs/001-repasse-transparente/quickstart.md) | Manual verification script |
 
-### Comandos
+### Commands
 
 ```
-/speckit:constitution   estabelece ou emenda os princípios
-/speckit:specify        cria a especificação de uma funcionalidade
-/speckit:clarify        extrai ambiguidades antes de planejar
-/speckit:plan           decide a abordagem técnica
-/speckit:tasks          quebra em tarefas executáveis
-/speckit:analyze        audita consistência entre os artefatos
-/speckit:implement      executa
+/speckit:constitution   sets or amends the principles
+/speckit:specify        writes the specification of a feature
+/speckit:clarify        surfaces ambiguities before planning
+/speckit:plan           decides the technical approach
+/speckit:tasks          breaks it into executable tasks
+/speckit:analyze        checks consistency across the artifacts
+/speckit:implement      runs it
 ```
 
 ---
 
-## Executar
+## Running it
 
 ```bash
+git clone https://github.com/brennocm/repasse-transparente.git
+cd repasse-transparente
 npm install
-npm run test    # 254 asserções
+npm run test    # 254 assertions
 npm run dev
 ```
 
 ## Stack
 
-Next.js com exportação estática, TypeScript strict, Tailwind CSS, shadcn/ui, Vitest.
-Sem backend, sem banco, sem variável de ambiente, sem dependência de rede em runtime.
+Next.js with static export, strict TypeScript, Tailwind CSS, shadcn/ui, Vitest.
+No backend, no database, no environment variables, no network dependency at runtime.
 
-## Licença
+## License
 
-MIT.
+[MIT](LICENSE).
