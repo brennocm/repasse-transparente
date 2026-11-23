@@ -3,6 +3,8 @@
 Auditoria criptográfica, oráculos de preço e rastreabilidade de verbas públicas para a
 primeira infância e educação.
 
+**Demo:** [repasse-transparente.vercel.app](https://repasse-transparente.vercel.app)
+
 Protótipo desenvolvido para o **UNICEF Youth Challenge Blockchain 2026** — Ideathon UNICEF
 x Superteam Brasil / Blockchain.RIO.
 
